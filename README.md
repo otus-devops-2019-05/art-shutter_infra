@@ -31,3 +31,13 @@ You will need a domain name. Use a custom one, or use one from [sslip.io](https:
 Enter you domain name into 'Lets Encrypt Domain' field in pritunl's settings.
 
 Next time you access the pritunl webpanel, use the domain name you've just configured.
+
+## 20.06 GCP deploy a test app
+
+###IP settings
+
+testapp_IP = 35.198.167.169
+
+testapp_port = 9292
+
+
