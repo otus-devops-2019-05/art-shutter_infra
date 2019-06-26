@@ -36,8 +36,46 @@ Next time you access the pritunl webpanel, use the domain name you've just confi
 
 ###IP settings
 
-testapp_IP = 35.198.167.169
+testapp_IP = 35.195.168.81
 
 testapp_port = 9292
 
+###Startup script
+
+To run a startup script at the creation of the instance, run this command:
+
+```shell
+gcloud compute instances create reddit-app \
+--boot-disk-size=10GB \
+--image-family ubuntu-1604-lts \
+--image-project=ubuntu-os-cloud \
+--machine-type=g1-small \
+--tags puma-server \
+--restart-on-failure \
+--metadata startup-script='#! /bin/bash
+log=initialization_script.log
+apt update && apt install -y ruby-full ruby-bundler build-essential
+ruby -v 2>&1  | tee -a $log
+bundler -v 2>&1 | tee -a $log
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+bash -c 'echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.2.list'
+apt update && apt install -y mongodb-org
+systemctl start mongod
+systemctl enable mongod 2>&1 | tee -a $log
+systemctl status mongod 2>&1 | tee -a $log
+git clone -b monolith https://github.com/express42/reddit.git
+cd reddit && bundle install
+puma -d 2>&1 | tee -a $log
+ps aux | grep puma | tee -a $log'
+```
+
+###Crate firewall rule using gcloud
+
+Use this command:
+
+```shell
+gcloud compute firewall-rules create default-puma-server \
+--allow tcp:9292 \
+--target-tags puma-server
+```
 
