@@ -1,0 +1,14 @@
+[Unit]
+Description=Puma server unit file
+After=network.target
+
+[Service]
+User=artem
+Group=artem
+Type=simple
+WorkingDirectory=/home/artem/reddit
+ExecStart=/usr/local/bin/puma
+TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target
