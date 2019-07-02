@@ -158,7 +158,7 @@ ssh-keys = "appuser:${file(var.public_key_path)} \nappuser1:${file(var.public_ke
 
 ### Using web-interface
 
-Be careful! Any changes you nake in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
+Be careful! Any changes you make in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
 
 ### Load balancing
 
