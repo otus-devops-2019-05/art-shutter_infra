@@ -1,0 +1,13 @@
+[Unit]
+Description=Puma server unit file
+After=network.target
+
+[Service]
+User=appuser
+Type=simple
+WorkingDirectory=/home/appuser/reddit
+ExecStart=/bin/bash -lc 'puma'
+TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target
