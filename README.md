@@ -12,7 +12,7 @@ someinternalhost_IP = 10.156.0.3
 
 ### connecting via ssh tunnel
 
-Pass <someinternalhost> arguments to the initial ssh command, like this:
+Pass `<someinternalhost>` arguments to the initial ssh command, like this:
 
 ```bash
 foo@bar:~$ ssh -A -t user@<bastion> ssh -A -t <someinternalhost>
@@ -116,3 +116,44 @@ gcloud compute instances create reddit-app \
 --machine-type=g1-small \
 --restart-on-failure
 ```
+
+## 6. 27.06 Terraform-1
+
+### Storing and setting variables
+
+Set variables and their defaults in any `<filename>.tf`
+
+```
+variable "zone" {
+  description = "Project zone"
+  default     = "us-central1-a"
+}
+```
+
+Set var values in `<filename>.tfvars` file like this:
+
+```
+project = "project_ID"
+region = "us-central1-a"
+public_key_path = "path_to_ssh_pub_file"
+private_key_path = "path_to_ssh_private_key"
+disk_image = "image_name"
+```
+
+### Adding several ssh-keys to metadata
+
+In order to add more than one ssh-key, use \n to separate lines
+
+```
+metadata {
+ssh-keys = "appuser:${file(var.public_key_path)} \nappuser1:${file(var.public_key_path)}
+}
+```
+
+### Using web-interface
+
+Be careful! Any changes you nake in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
+
+### Load balancing
+
+This scheme is for demonstration purposes only as it allows for configuration drift and doesn't let you create more idetical instances. Consider using VM templates.
