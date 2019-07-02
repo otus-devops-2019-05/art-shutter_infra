@@ -2,7 +2,7 @@
 
 Repository with home tasks for OTUS/express42 DevOps course.
 
-## 18.06 GCP BastionHost/VPN
+## 3. 18.06 GCP BastionHost/VPN
 
 ### IP settings
 
@@ -32,7 +32,7 @@ Enter you domain name into 'Lets Encrypt Domain' field in pritunl's settings.
 
 Next time you access the pritunl webpanel, use the domain name you've just configured.
 
-## 20.06 GCP deploy a test app
+## 4. 20.06 GCP deploy test app
 
 ### IP settings
 
@@ -84,3 +84,42 @@ gcloud compute firewall-rules create default-puma-server \
 --allow tcp:9292 \
 --target-tags puma-server
 ```
+
+## 5. 25.06 Packer
+
+### Install packer
+
+To install packer, follow instructions [here](https://www.packer.io/intro/getting-started/install.html#precompiled-binaries).
+
+### Packer's JSON file sections
+
+There are 'builders' and 'provisioners'. Use 'builders' to specify vm instance options and 'provisioners' to specify what has to be baked into the image. Example of 'provisioners':
+
+```
+"provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+]
+```
+
+### Variables in Packer
+
+You can specify variables
+- inside the main .json
+- in separate .json with variables (don't add it as a new section, plain object); in this case specify `-var-file=file.json`
+- as cli parameter, for instance `-var 'image_family=ubuntu'`
+
+### Running required VM with gcloud
+
+Possible command would be:
+
+```shell
+gcloud compute instances create reddit-app \
+--image-family reddit-full \
+--machine-type=g1-small \
+--restart-on-failure
+```
+

@@ -1,0 +1,36 @@
+{
+    "builders":
+    [
+        {
+            "type": "googlecompute",
+            "image_family": "reddit-full",
+            "source_image_family": "reddit-base",
+            "project_id": "{{user `project_id_var`}}",
+            "image_name": "reddit-full-{{timestamp}}",
+            "zone": "europe-west1-b",
+            "ssh_username": "artem",
+            "machine_type": "{{user `machine_type_var`}}",
+            "image_description": "reddit app full image with baked dependencies",
+            "disk_type": "pd-ssd",
+            "disk_size": "10",
+            "tags": [
+                "http-server",
+                "https-server",
+                "puma-server"
+            ],
+            "network": "default"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_puma.sh",
+            "execute_command": "{{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_puma-service.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
