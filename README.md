@@ -156,11 +156,23 @@ ssh-keys = "appuser:${file(var.public_key_path)} \nappuser1:${file(var.public_ke
 }
 ```
 
+As well as that, you could use the 'here-document' syntax. Mind the absence of extra spaces and formatting.
+
+```
+  metadata {
+    ssh-keys = <<EOF
+appuser:${file(var.public_key_path)}
+appuser1:${file(var.public_key_path)}
+EOF
+  }
+```
+
+You can add these keys project-wide, just specify the correct resource
+
+```
+resource "google_compute_project_metadata" "ssh-keys" {}
+```
+
 ### Using web-interface
 
 Be careful! Any changes you make in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
-
-### Load balancing
-
-This scheme is for demonstration purposes only as it allows for configuration drift and doesn't let you create more idetical instances. Consider using VM templates.
-
