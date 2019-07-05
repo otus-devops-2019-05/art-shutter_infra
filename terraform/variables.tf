@@ -4,6 +4,7 @@ variable project {
 
 variable region {
   description = "Region"
+  default     = "us-central1"
 }
 
 variable "zone" {
@@ -25,4 +26,14 @@ variable disk_image {
 
 variable "count" {
   description = "number of instances"
+}
+
+variable app_disk_image {
+  description = "Disk image for reddit app"
+  default = "reddit-app-base"
+}
+
+variable db_disk_image {
+  description = "Disk image for reddit db"
+  default = "reddit-db-base"
 }

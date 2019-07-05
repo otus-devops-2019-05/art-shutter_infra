@@ -5,4 +5,5 @@ packer/variables.json
 *.tfstate.backup
 *.tfvars
 .terraform/
+.DS*
 
