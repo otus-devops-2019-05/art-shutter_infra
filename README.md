@@ -12,7 +12,7 @@ someinternalhost_IP = 10.156.0.3
 
 ### connecting via ssh tunnel
 
-Pass <someinternalhost> arguments to the initial ssh command, like this:
+Pass `<someinternalhost>` arguments to the initial ssh command, like this:
 
 ```bash
 foo@bar:~$ ssh -A -t user@<bastion> ssh -A -t <someinternalhost>
@@ -123,3 +123,56 @@ gcloud compute instances create reddit-app \
 --restart-on-failure
 ```
 
+## 6. 27.06 Terraform-1
+
+### Storing and setting variables
+
+Set variables and their defaults in any `<filename>.tf`
+
+```
+variable "zone" {
+  description = "Project zone"
+  default     = "us-central1-a"
+}
+```
+
+Set var values in `<filename>.tfvars` file like this:
+
+```
+project = "project_ID"
+region = "us-central1-a"
+public_key_path = "path_to_ssh_pub_file"
+private_key_path = "path_to_ssh_private_key"
+disk_image = "image_name"
+```
+
+### Adding several ssh-keys to metadata
+
+In order to add more than one ssh-key, use \n to separate lines
+
+```
+metadata {
+ssh-keys = "appuser:${file(var.public_key_path)} \nappuser1:${file(var.public_key_path)}
+}
+```
+
+As well as that, you could use the 'here-document' syntax. Mind the absence of extra spaces and formatting.
+
+```
+  metadata {
+    ssh-keys = <<EOF
+appuser:${file(var.public_key_path)}
+appuser1:${file(var.public_key_path)}
+EOF
+  }
+```
+
+You can add these keys project-wide, just specify the correct resource
+
+```
+resource "google_compute_project_metadata" "ssh-keys" {}
+```
+
+### Using web-interface
+
+Be careful! Any changes you make in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
