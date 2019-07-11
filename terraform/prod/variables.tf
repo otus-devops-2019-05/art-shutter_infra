@@ -40,5 +40,5 @@ variable db_disk_image {
 
 variable source_ranges_prod {
   description = "Source ranges for firewall, production"
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }

@@ -40,6 +40,5 @@ variable db_disk_image {
 
 variable source_ranges_stage {
   description = "Source ranges for firewall, staging"
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
-
