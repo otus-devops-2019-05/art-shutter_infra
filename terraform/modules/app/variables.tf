@@ -11,3 +11,9 @@ variable app_disk_image {
 
   default = "reddit-app-base"
 }
+
+variable count {
+  description = "instances count"
+
+  default = 1
+}
