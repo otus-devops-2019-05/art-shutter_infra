@@ -199,3 +199,5 @@ output storage-bucket_url {
 
 Don't forget to re-initialize terraform to create buckets.
 
+## 8. 11.07 Ansible-1
+
