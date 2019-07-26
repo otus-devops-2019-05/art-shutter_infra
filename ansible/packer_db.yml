@@ -1,0 +1,27 @@
+---
+- name: install mongo
+  hosts: all
+  become: true
+  tasks:
+  - name: install apt key
+    apt_key:
+      keyserver: hkp://keyserver.ubuntu.com:80
+      id: EA312927
+      state: present
+
+  - name: add mongod repo
+    apt_repository:
+      repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse
+      state: present
+
+  - name: update apt cache and install mongod
+    apt:
+      update_cache: yes
+      state: latest
+      name: xenial/mongodb-org/3.2
+
+  - name: enable and start mongod service
+    systemd:
+      enabled: yes
+      state: started
+      name: mongod

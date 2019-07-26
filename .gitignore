@@ -5,4 +5,5 @@ packer/variables.json
 *.tfstate.backup
 .terraform/
 .DS*
-
+*.retry
+Infra-fc48ce787556.json
