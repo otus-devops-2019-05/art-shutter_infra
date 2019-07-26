@@ -9,8 +9,7 @@
       - build-essential
   tasks:
   - name: install ruby, rubygems and required packages
-    apt: 
+    apt:
       name: "{{ item }}"
       state: present
     loop: "{{ packages }}"
-    
