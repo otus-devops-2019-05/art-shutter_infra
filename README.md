@@ -205,3 +205,6 @@ Don'ts:
 - Don't overuse modules `shell` and `command`. Use inbuilt modules.
 - Don't expect single commands to execute identically each time. Use playbooks for that.
 
+## 9. 16.07 Ansible-2
+
+To Set up dynamic inventory for GCP, use an inbuilt module. You could follow [this guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html). Don't forget to create special [service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances#using) for GCP project.
