@@ -214,3 +214,4 @@ To set up dynamic inventory for GCP, use an inbuilt module. You could follow [th
 To form initial directory structure use `ansible-galaxy init`. 
 Once done, don't forget to modify `ansible.cfg` accordingly.
 `group_vars` directory contains vars for the environment.
+To use community roles define them for each environment in `requirements.yml`, then pull them using `ansible-galaxy install -r <requirements.yml>`
