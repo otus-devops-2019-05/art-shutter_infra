@@ -176,3 +176,26 @@ resource "google_compute_project_metadata" "ssh-keys" {}
 ### Using web-interface
 
 Be careful! Any changes you make in the web-interface don't get updated in the .tfstate file, thus any changes you make outside of Terrafom get overwritten with the next `apply` command.
+
+## 7. 02.07 Terraform-2
+
+To keep `tfstate` file updated and synced, you could use buckets and a seperate backend. 
+For each envirnment, define parameters in `backend.tf`.
+
+In the root of the repo, conigure buckets themselves.
+
+```ruby
+module "storage-bucket" {
+  source  = "SweetOps/storage-bucket/google"
+  version = "0.1.1"
+  
+  name = ["storage-bucket-changemename", "storage-bucket-changemename2"]
+}
+
+output storage-bucket_url {
+  value = "${module.storage-bucket.url}"
+}
+```
+
+Don't forget to re-initialize terraform to create buckets.
+

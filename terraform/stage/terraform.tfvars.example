@@ -1,0 +1,9 @@
+project = "infra-244312"
+public_key_path = "~/.ssh/appuser.pub"
+private_key_path = "~/.ssh/appuser"
+disk_image = "reddit-base"
+region = "us-central1"
+zone = "us-central1-a"
+count = "1"
+source_ranges_stage = ["0.0.0.0/0"]
+
