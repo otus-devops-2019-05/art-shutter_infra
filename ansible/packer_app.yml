@@ -1,0 +1,15 @@
+---
+- name: install ruby and bundler
+  hosts: all
+  become: true
+  vars:
+    packages:
+      - ruby-full
+      - ruby-bundler
+      - build-essential
+  tasks:
+  - name: install ruby, rubygems and required packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ packages }}"
