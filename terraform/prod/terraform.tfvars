@@ -6,3 +6,4 @@ region = "us-central1"
 zone = "us-central1-a"
 count = "1"
 source_ranges_prod = ["195.239.51.236/32"]
+port_app = "80"
