@@ -7,3 +7,5 @@ packer/variables.json
 .DS*
 *.retry
 Infra-fc48ce787556.json
+jdauphant.nginx
+vault.key

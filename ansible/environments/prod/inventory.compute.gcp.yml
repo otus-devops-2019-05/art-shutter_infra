@@ -1,0 +1,5 @@
+plugin: gcp_compute
+projects:
+  - infra-244312
+auth_kind: serviceaccount
+service_account_file: Infra-fc48ce787556.json

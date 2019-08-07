@@ -207,4 +207,11 @@ Don'ts:
 
 ## 9. 16.07 Ansible-2
 
-To Set up dynamic inventory for GCP, use an inbuilt module. You could follow [this guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html). Don't forget to create special [service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances#using) for GCP project.
+To set up dynamic inventory for GCP, use an inbuilt module. You could follow [this guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html). Don't forget to create special [service account](https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances#using) for GCP project.
+
+## 10. 18.07 Ansible-3
+
+To form initial directory structure use `ansible-galaxy init`. 
+Once done, don't forget to modify `ansible.cfg` accordingly.
+`group_vars` directory contains vars for the environment.
+To use community roles define them for each environment in `requirements.yml`, then pull them using `ansible-galaxy install -r <requirements.yml>`

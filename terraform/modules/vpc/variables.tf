@@ -3,3 +3,10 @@ variable source_ranges {
 
   default = ["0.0.0.0/0"]
 }
+
+variable "port_app" {
+  description = "Allowed app ports"
+
+  default = ["80"]
+}
+
