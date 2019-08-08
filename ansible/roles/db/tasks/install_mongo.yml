@@ -1,0 +1,24 @@
+---
+- name: install apt key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 68818C72E52529D4
+    state: present
+
+- name: add mongod repo
+  apt_repository:
+    repo: deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse
+    state: present
+
+- name: update apt cache and install mongod
+  apt:
+    update_cache: yes
+    allow_unauthenticated: yes
+    state: latest
+    name: mongodb-org
+
+- name: enable and start mongod service
+  systemd:
+    enabled: yes
+    state: started
+    name: mongod

@@ -9,3 +9,9 @@ packer/variables.json
 Infra-fc48ce787556.json
 jdauphant.nginx
 vault.key
+# Vagrant and molecule
+.vagrant/
+*.log*.pyc
+.molecule
+.cache
+.pytest_cache
